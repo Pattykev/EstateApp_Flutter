@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "401289978767",
+    "project_id": "estateapp-86e3b",
+    "storage_bucket": "estateapp-86e3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401289978767:android:dc646651a1859f4ae261fa",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO5MmxQe0HHO0cSa83tqBfkpR7U75q08s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
