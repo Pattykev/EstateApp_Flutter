@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/pages/home_pageP.dart';
+import 'package:flutter_application_1/pages/home/home_pageP.dart';
+import 'package:flutter_application_1/pages/home/main_page.dart';
+import 'package:flutter_application_1/pages/onboarding/onboarding_screen.dart';
+import 'package:flutter_application_1/utils/firebase_options.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'pages/home_page.dart';
+import 'pages/home/home_page.dart';
 import 'pages/auth/login_page.dart';
 import 'package:flutter_application_1/helper/helper_function.dart';
 import 'package:flutter_application_1/shared/constants.dart';
@@ -19,6 +24,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _isSignedIn = false;
+  bool? isViewed;
   String role = '';
 
   @override
@@ -47,6 +53,12 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void onBoard() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    isViewed = pref.getBool('onBoard');
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -54,9 +66,12 @@ class _MyAppState extends State<MyApp> {
           primaryColor: Constants().primaryColor,
           scaffoldBackgroundColor: Colors.white),
       debugShowCheckedModeBanner: false,
-      home: _isSignedIn
-          ? (role == 'Visiteur' ? const HomePage() : const HomePageP())
-          : const LoginPage(),
+      home: isViewed == true
+          ? (_isSignedIn
+              ? (role == 'Visiteur' ? const HomePage() : const HomePageP())
+              : const LoginPage())
+          : const OnBoardingScreen(),
+      //));
     );
   }
 }

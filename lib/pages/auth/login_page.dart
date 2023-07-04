@@ -1,7 +1,7 @@
 import 'package:flutter_application_1/helper/helper_function.dart';
 import 'package:flutter_application_1/pages/auth/register_page.dart';
-import 'package:flutter_application_1/pages/home_page.dart';
-import 'package:flutter_application_1/pages/home_pageP.dart';
+import 'package:flutter_application_1/pages/home/home_page.dart';
+import 'package:flutter_application_1/pages/home/home_pageP.dart';
 import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:flutter_application_1/service/database_service.dart';
 import 'package:flutter_application_1/widgets/widgets.dart';
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
           : SingleChildScrollView(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 45),
                 child: Form(
                     key: formKey,
                     child: Column(
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w400)),
                         const SizedBox(height: 5),
-                        Image.asset("assets/logo.png"),
+                        Image.asset("assets/logo1.png"),
                         const SizedBox(height: 5),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(

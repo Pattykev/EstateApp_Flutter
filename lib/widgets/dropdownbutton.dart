@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-final List<String> list = ['  Propriétaire', '   Visiteur'];
+final List<String> list = [
+  '  Appartement',
+  '   Maison',
+  '    Villa',
+  '   Studio'
+];
 
 class DropDownButton extends StatefulWidget {
   const DropDownButton({super.key});
@@ -23,7 +28,7 @@ class _DropDownButton extends State<DropDownButton> {
         dropdownColor: Color.fromARGB(255, 160, 217, 245),
         elevation: 16,
         hint: Text(
-          '   Rôle',
+          '   Type de logement',
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
         style: const TextStyle(color: Colors.black),

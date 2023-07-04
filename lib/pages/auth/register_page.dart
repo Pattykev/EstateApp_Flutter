@@ -1,7 +1,7 @@
 import 'package:flutter_application_1/helper/helper_function.dart';
 import 'package:flutter_application_1/pages/auth/login_page.dart';
-import 'package:flutter_application_1/pages/home_page.dart';
-import 'package:flutter_application_1/pages/home_pageP.dart';
+import 'package:flutter_application_1/pages/home/home_page.dart';
+import 'package:flutter_application_1/pages/home/home_pageP.dart';
 import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:flutter_application_1/widgets/dropdownbutton.dart';
 import 'package:flutter_application_1/widgets/widgets.dart';
@@ -27,6 +27,14 @@ class _RegisterPageState extends State<RegisterPage> {
   String surname = "";
   String phone = "";
   String? role = "";
+  bool isOwner = false;
+
+  void toggleChoice() {
+    setState(() {
+      isOwner = !isOwner;
+    });
+  }
+
   AuthService authService = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
           : SingleChildScrollView(
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 80),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 45),
                 child: Form(
                     key: formKey,
                     child: Column(
@@ -56,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.w400)),
                         const SizedBox(height: 5),
-                        Image.asset("assets/logo.png"),
+                        Image.asset("assets/logo1.png"),
                         const SizedBox(height: 5),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
@@ -174,8 +182,78 @@ class _RegisterPageState extends State<RegisterPage> {
                           height: 15,
                         ),
                         // drop down button
-                        DropDownButton(),
-                        const SizedBox(height: 20),
+                        //DropDownButton(),
+                        //const SizedBox(height: 20),
+
+                        //les champs cachés à afficher
+
+                        isOwner
+                            ? Container(
+                                margin: EdgeInsets.symmetric(vertical: 15),
+                                child: Column(
+                                  children: [
+                                    TextFormField(
+                                      decoration: textInputDecoration.copyWith(
+                                          labelText:
+                                              "Le Nom de votre propriété",
+                                          prefixIcon: Icon(
+                                            Icons.home,
+                                            color: Color.fromARGB(
+                                                255, 40, 178, 247),
+                                          )),
+                                      onChanged: (val) {
+                                        setState(() {
+                                          phone = val;
+                                        });
+                                      },
+
+                                      // check tha validation
+                                      validator: (val) {
+                                        if (val!.isNotEmpty) {
+                                          return null;
+                                        } else {
+                                          return "Le nom du logement doit être renseigner";
+                                        }
+                                      },
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    DropDownButton(),
+                                  ],
+                                ),
+                              )
+                            : Container(),
+
+                        //Switch button pour le role propriétaire
+                        Container(
+                          margin: const EdgeInsets.symmetric(vertical: 5),
+                          child: Row(
+                            children: [
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              const Text(
+                                "Je suis propriétaire",
+                                style:
+                                    TextStyle(fontSize: 18, color: Colors.grey),
+                              ),
+                              Switch(
+                                value: isOwner,
+                                onChanged: (_) => {
+                                  toggleChoice(),
+                                },
+                                trackColor: const MaterialStatePropertyAll(
+                                  Colors.grey,
+                                ),
+                                thumbColor: const MaterialStatePropertyAll(
+                                  Color.fromARGB(255, 160, 217, 245),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(

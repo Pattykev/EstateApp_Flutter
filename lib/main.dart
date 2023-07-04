@@ -6,6 +6,7 @@ import 'package:flutter_application_1/shared/constants.dart';
 
 import 'app.dart';
 
+bool? isViewed;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -19,9 +20,6 @@ void main() async {
   } else {
     await Firebase.initializeApp();
   }
-
-  // SharedPreferences pref = await SharedPreferences.getInstance();
-  //isViewed = pref.getBool('onBoard');
 
   runApp(const MyApp());
 }
