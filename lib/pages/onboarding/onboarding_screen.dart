@@ -69,7 +69,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         },
                         child: const Text(
                           "Passer ",
-                          style: TextStyle(color: primary),
+                          style: TextStyle(color: AppColor.primary),
                         ),
                       )
                     : const Text(''),
@@ -80,7 +80,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     dotDecoration: const DotDecoration(
                       width: 12,
                       height: 8,
-                      color: secondary,
+                      color: AppColor.secondary,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(2),
                         topRight: Radius.circular(16),
@@ -92,7 +92,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     activeDotDecoration: DotDecoration(
                       width: 25,
                       height: 12,
-                      color: primary,
+                      color: AppColor.primary,
                       rotationAngle: 180,
                       verticalOffset: -10,
                       borderRadius: BorderRadius.circular(50),
@@ -120,7 +120,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         child: const Icon(
                           Icons.arrow_circle_right_rounded,
                           size: 50,
-                          color: primary,
+                          color: AppColor.primary,
                         ),
                       )
                     : GestureDetector(
@@ -135,7 +135,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         child: const Icon(
                           Icons.arrow_circle_right_rounded,
                           size: 30,
-                          color: secondary,
+                          color: AppColor.secondary,
                         ),
                       ),
               ],

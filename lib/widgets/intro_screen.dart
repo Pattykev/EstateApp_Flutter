@@ -58,7 +58,7 @@ class IntroScreen extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
-                  color: primary,
+                  color: AppColor.primary,
                 ),
               ),
               Text(
@@ -66,7 +66,7 @@ class IntroScreen extends StatelessWidget {
                 style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
-                    color: secondary),
+                    color: AppColor.secondary),
               ),
             ],
           ),

@@ -1,132 +1,261 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_application_1/utils/color.dart';
+import 'package:flutter_application_1/utils/data.dart';
+import 'package:flutter_application_1/widgets/category_item.dart';
+import 'package:flutter_application_1/widgets/custom_image.dart';
+import 'package:flutter_application_1/widgets/custom_textbox.dart';
+import 'package:flutter_application_1/widgets/icon_box.dart';
+import 'package:flutter_application_1/widgets/property_item.dart';
+import 'package:flutter_application_1/widgets/recent_item.dart';
+import 'package:flutter_application_1/widgets/recommend_item.dart';
 
-import '../../model/product.dart';
-import '../../model/products_repository.dart';
-
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  // TODO: Make a collection of cards (102)
-  //on lui passe le nombre d'element à afficher en paramètre
-  // TODO: Make a collection of cards (102)
+  @override
+  _HomePageState createState() => _HomePageState();
+}
 
-// Replace this entire method
-  List<Card> _buildGridCards(BuildContext context) {
-    List<Product> products = ProductsRepository.loadProducts(Category.all);
+class _HomePageState extends State<HomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: <Widget>[
+        SliverAppBar(
+          backgroundColor: AppColor.appBgColor,
+          pinned: true,
+          snap: true,
+          floating: true,
+          title: _buildHeader(),
+        ),
+        SliverToBoxAdapter(child: _buildBody())
+      ],
+    );
+  }
 
-    if (products.isEmpty) {
-      return const <Card>[];
-    }
-
-    final ThemeData theme = Theme.of(context);
-    final NumberFormat formatter = NumberFormat.simpleCurrency(
-        locale: Localizations.localeOf(context).toString());
-
-    return products.map((product) {
-      return Card(
-        clipBehavior: Clip.antiAlias,
-        // TODO: Adjust card heights (103)
-        child: Column(
-          // TODO: Center items on the card (103)
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            AspectRatio(
-              aspectRatio: 18 / 11,
-              child: Image.asset(
-                product.assetName,
-                package: product.assetPackage,
-                // TODO: Adjust the box size (102)
-                // TODO: Adjust the box size (102)
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-                child: Column(
-                  // TODO: Align labels to the bottom and center (103)
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // TODO: Change innermost Column (103)
-                  children: <Widget>[
-                    // TODO: Handle overflowing labels (103)
-                    Text(
-                      product.name,
-                      style: theme.textTheme.titleLarge,
-                      maxLines: 1,
-                    ),
-                    const SizedBox(height: 8.0),
-                    Text(
-                      formatter.format(product.price),
-                      style: theme.textTheme.titleSmall,
-                    ),
-                  ],
+  _buildHeader() {
+    return Column(
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Hello!",
+                  style: TextStyle(
+                    color: AppColor.darker,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
+                Text(
+                  "PattyKev",
+                  style: TextStyle(
+                    color: Colors.black87,
+                    fontSize: 17,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+            CustomImage(
+              profile,
+              width: 35,
+              height: 35,
+              trBackground: true,
+              borderColor: AppColor.primary,
+              radius: 10,
             ),
           ],
         ),
-      );
-    }).toList();
+      ],
+    );
   }
 
-  // TODO: Add a variable for Category (104)
-  @override
-  Widget build(BuildContext context) {
-    // TODO: Return an AsymmetricView (104)
-    // TODO: Pass Category variable to AsymmetricView (104)
-    return Scaffold(
-      // TODO: Add app bar (102)
-      appBar: AppBar(
-        // TODO: Add trailing buttons (102)
-        backgroundColor: Colors.lightBlueAccent,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
+  _buildBody() {
+    return Material(
+        child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 15,
           ),
-          onPressed: () {
-            print('Menu button');
-          },
-        ),
-        // TODO: Add buttons and title (102)
-        // ignore: unnecessary_const
-        title: const Text('ESTATE APP'),
-
-        // TODO: Add trailing buttons (102)
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
-            ),
-            onPressed: () {
-              print('Search button');
-            },
+          _buildSearch(),
+          const SizedBox(
+            height: 20,
           ),
-          IconButton(
-            icon: const Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
+          _buildCategories(),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                Text(
+                  "Populaire",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Voir tout",
+                  style: TextStyle(fontSize: 14, color: AppColor.darker),
+                ),
+              ],
             ),
-            onPressed: () {
-              print('Filter button');
-            },
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _buildPopulars(),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Recommandé",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Voir tout",
+                  style: TextStyle(fontSize: 14, color: AppColor.darker),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _buildRecommended(),
+          const SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Récent",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Voir tout",
+                  style: TextStyle(fontSize: 14, color: AppColor.darker),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          _buildRecent(),
+          const SizedBox(
+            height: 100,
           ),
         ],
       ),
-      // TODO: Add a grid view (102)
-      body: GridView.count(
-          //nombre d'element par ligne
-          crossAxisCount: 2,
-          padding: const EdgeInsets.all(16.0),
-          //taille des éléments
-          childAspectRatio: 8.0 / 9.0,
+    ));
+  }
 
-          // TODO: Build a grid of cards (102)
-          children: _buildGridCards(context)),
+  int _selectedCategory = 0;
+  Widget _buildCategories() {
+    List<Widget> lists = List.generate(
+      categories.length,
+      (index) => CategoryItem(
+        data: categories[index],
+        selected: index == _selectedCategory,
+        onTap: () {
+          setState(() {
+            _selectedCategory = index;
+          });
+        },
+      ),
+    );
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: EdgeInsets.only(bottom: 5, left: 15),
+      child: Row(children: lists),
+    );
+  }
 
-      // TODO: Set resizeToAvoidBottomInset (101)
+  Widget _buildPopulars() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 240,
+        enlargeCenterPage: true,
+        disableCenter: true,
+        viewportFraction: .8,
+      ),
+      items: List.generate(
+        populars.length,
+        (index) => PropertyItem(
+          data: populars[index],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRecommended() {
+    List<Widget> lists = List.generate(
+      recommended.length,
+      (index) => RecommendItem(
+        data: recommended[index],
+      ),
+    );
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: EdgeInsets.only(bottom: 5, left: 15),
+      child: Row(children: lists),
+    );
+  }
+
+  Widget _buildRecent() {
+    List<Widget> lists = List.generate(
+      recents.length,
+      (index) => RecentItem(
+        data: recents[index],
+      ),
+    );
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: EdgeInsets.only(bottom: 5, left: 15),
+      child: Row(children: lists),
+    );
+  }
+
+  Widget _buildSearch() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Row(
+        children: [
+          Expanded(
+            child: CustomTextBox(
+              hint: "Rechercher",
+              prefix: Icon(Icons.search, color: Colors.grey),
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          IconBox(
+            child: Icon(Icons.filter_list_rounded, color: Colors.white),
+            bgColor: AppColor.secondary,
+            radius: 10,
+          )
+        ],
+      ),
     );
   }
 }

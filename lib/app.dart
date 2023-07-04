@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/home/home_pageP.dart';
-import 'package:flutter_application_1/pages/home/main_page.dart';
 import 'package:flutter_application_1/pages/onboarding/onboarding_screen.dart';
 import 'package:flutter_application_1/utils/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +13,7 @@ import 'package:flutter_application_1/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_application_1/pages/auth/login_page.dart';
 import 'package:flutter_application_1/service/database_service.dart';
+import 'package:flutter_application_1/pages/visitor/root.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
