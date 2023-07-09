@@ -37,9 +37,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             children: const [
               IntroScreen(
                 image: onBoardingImage1,
-                title: "Les types de maison disponible",
+                title: "Les types de logement disponible",
                 description:
-                    "Des appartements aux villas trouver le logement qui vous convient",
+                    "Des studios aux triplex, en passant par des appartements trouver le logement qui vous convient",
                 count: "1",
               ),
               IntroScreen(

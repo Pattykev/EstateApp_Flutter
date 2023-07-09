@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/color.dart';
 
+import '../model/house.dart';
+import '../pages/details/details_screen.dart';
+import '../utils/data.dart';
+
 class CategoryItem extends StatelessWidget {
-  const CategoryItem({
+  CategoryItem({
     Key? key,
     required this.data,
     this.selected = false,
@@ -12,12 +16,12 @@ class CategoryItem extends StatelessWidget {
   final data;
   final bool selected;
   final GestureTapCallback? onTap;
+  //House house = populars[0];
 
   @override
   Widget build(BuildContext context) {
     return Material(
         child: GestureDetector(
-      onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         curve: Curves.fastOutSlowIn,
@@ -64,3 +68,15 @@ class CategoryItem extends StatelessWidget {
     ));
   }
 }
+/*
+onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => DetailsScreen(
+              house: house,
+            ),
+          ),
+        );
+      },
+      */

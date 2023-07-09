@@ -13,11 +13,13 @@ class AppColor {
   static const darker = Color(0xFF3E4249);
   static const cardColor = Colors.white;
   static const mainColor = Color(0xFF000000);
+  static const black = Color(0xFF000000);
   static const appBgColor = Color(0xFFFAFAFA);
   static const shadowColor = Colors.black87;
   static const textBoxColor = Colors.white;
 
   static const bottomBarColor = Colors.white;
+  static const white = Colors.white;
   static const inActiveColor = Colors.grey;
 
   static const yellow = Color(0xFFffcb66);
@@ -28,6 +30,7 @@ class AppColor {
   static const orange = Color(0xFFFFC8A2);
   static const sky = Color(0xFFABDEE6);
   static const blue = Color(0xFF509BE4);
+  static const appPadding = 30.0;
 
   static const listColors = [
     green,

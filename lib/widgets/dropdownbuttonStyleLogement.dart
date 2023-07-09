@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 
-class DropDownButton extends StatefulWidget {
-  const DropDownButton({super.key});
+class DropDownButtonStyle extends StatefulWidget {
+  const DropDownButtonStyle({super.key});
 
   @override
-  State<DropDownButton> createState() => _DropDownButton();
+  State<DropDownButtonStyle> createState() => _DropDownButtonStyle();
 }
 
-final List<String> list = [
-  '  Appartement',
-  '   Maison',
-  '    Villa',
-  '   Studio'
-];
-String textTypeLogement = '   Type de logement';
+final List<String> list = ['  Logement privé', '   Logement collectif'];
+String textStyleLogement = '   Style de logement';
 
-class _DropDownButton extends State<DropDownButton> {
+class _DropDownButtonStyle extends State<DropDownButtonStyle> {
   static String? dropdownValue;
 
   @override
@@ -29,7 +24,7 @@ class _DropDownButton extends State<DropDownButton> {
         dropdownColor: Color.fromARGB(255, 160, 217, 245),
         elevation: 16,
         hint: Text(
-          textTypeLogement,
+          textStyleLogement,
           style: TextStyle(color: Colors.black, fontSize: 14),
         ),
         style: const TextStyle(color: Colors.black),
@@ -61,6 +56,6 @@ class _DropDownButton extends State<DropDownButton> {
   // static String test = dropdownValue;
 }
 
-class DataDropDownButton {
-  static String? getValue = _DropDownButton.dropdownValue;
+class DataDropDownButtonStyle {
+  static String? getValue = _DropDownButtonStyle.dropdownValue;
 }

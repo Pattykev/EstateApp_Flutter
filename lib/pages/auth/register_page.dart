@@ -1,15 +1,19 @@
+import 'dart:io';
+
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_application_1/helper/helper_function.dart';
 import 'package:flutter_application_1/pages/auth/login_page.dart';
 import 'package:flutter_application_1/pages/home/home_page.dart';
 import 'package:flutter_application_1/pages/home/home_pageP.dart';
 import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:flutter_application_1/widgets/dropdownbutton.dart';
+import 'package:flutter_application_1/widgets/uploadimage.dart';
 import 'package:flutter_application_1/widgets/widgets.dart';
 import 'package:flutter_application_1/widgets/dropdownbutton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
 import '../../widgets/dropdownbutton.dart';
+import '../../widgets/dropdownbuttonStyleLogement.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -27,6 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String surname = "";
   String phone = "";
   String? role = "";
+//String linkImage=UploadImage.pickUploadProfilePic();
   bool isOwner = false;
 
   void toggleChoice() {
@@ -192,34 +197,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                 margin: EdgeInsets.symmetric(vertical: 15),
                                 child: Column(
                                   children: [
-                                    TextFormField(
-                                      decoration: textInputDecoration.copyWith(
-                                          labelText:
-                                              "Le Nom de votre propriété",
-                                          prefixIcon: Icon(
-                                            Icons.home,
-                                            color: Color.fromARGB(
-                                                255, 40, 178, 247),
-                                          )),
-                                      onChanged: (val) {
-                                        setState(() {
-                                          phone = val;
-                                        });
-                                      },
-
-                                      // check tha validation
-                                      validator: (val) {
-                                        if (val!.isNotEmpty) {
-                                          return null;
-                                        } else {
-                                          return "Le nom du logement doit être renseigner";
-                                        }
-                                      },
-                                    ),
+                                    //Upload house images
+                                    UploadImage(),
                                     const SizedBox(
                                       height: 20,
                                     ),
                                     DropDownButton(),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    DropDownButtonStyle(),
                                   ],
                                 ),
                               )
