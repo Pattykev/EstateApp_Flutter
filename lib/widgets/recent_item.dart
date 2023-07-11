@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/color.dart';
 
+import '../pages/details/details_screen.dart';
 import 'custom_image.dart';
 
 class RecentItem extends StatelessWidget {
@@ -26,9 +27,22 @@ class RecentItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CustomImage(
-            data["image"],
-            radius: 20,
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DetailsScreen(
+                    house: data,
+                  ),
+                ),
+              );
+            },
+            child: CustomImage(
+              data["image"],
+              radius: 20,
+            ),
           ),
           const SizedBox(
             width: 15,

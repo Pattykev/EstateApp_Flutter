@@ -5,7 +5,6 @@ import 'package:flutter_application_1/widgets/broker_item.dart';
 import 'package:flutter_application_1/widgets/company_item.dart';
 import 'package:flutter_application_1/widgets/custom_textbox.dart';
 import 'package:flutter_application_1/widgets/icon_box.dart';
-import 'package:flutter_application_1/widgets/recommend_item.dart';
 
 class ExplorePage extends StatefulWidget {
   const ExplorePage({Key? key}) : super(key: key);
@@ -70,10 +69,6 @@ class _ExplorePageState extends State<ExplorePage> {
           const SizedBox(
             height: 20,
           ),
-          _buildRecommended(),
-          const SizedBox(
-            height: 20,
-          ),
           const Padding(
             padding: EdgeInsets.only(left: 15),
             child: Text(
@@ -97,21 +92,6 @@ class _ExplorePageState extends State<ExplorePage> {
           ),
         ],
       ),
-    );
-  }
-
-  _buildRecommended() {
-    List<Widget> lists = List.generate(
-      recommended.length,
-      (index) => RecommendItem(
-        data: recommended[index],
-      ),
-    );
-
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.only(bottom: 5, left: 15),
-      child: Row(children: lists),
     );
   }
 

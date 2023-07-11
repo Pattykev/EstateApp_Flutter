@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/color.dart';
 
 import '../model/house.dart';
+import '../pages/category/studio.dart';
 import '../pages/details/details_screen.dart';
 import '../utils/data.dart';
 
@@ -21,7 +22,6 @@ class CategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-        child: GestureDetector(
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         curve: Curves.fastOutSlowIn,
@@ -65,7 +65,7 @@ class CategoryItem extends StatelessWidget {
           ],
         ),
       ),
-    ));
+    );
   }
 }
 /*

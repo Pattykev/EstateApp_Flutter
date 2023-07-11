@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/schedule/schedule_screen.dart';
+
+import '../../utils/color.dart';
 
 class AppointmentScreen extends StatelessWidget {
   List imgs = [
@@ -12,7 +15,7 @@ class AppointmentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF7165D6),
+      backgroundColor: AppColor.primary,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -29,7 +32,7 @@ class AppointmentScreen extends StatelessWidget {
                           Navigator.pop(context);
                         },
                         child: Icon(
-                          Icons.arrow_back_ios_new,
+                          Icons.arrow_back,
                           color: Colors.white,
                           size: 25,
                         ),
@@ -43,62 +46,33 @@ class AppointmentScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CircleAvatar(
-                          radius: 35,
-                          backgroundImage: AssetImage("images/doctor1.jpg"),
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          "Dr. Doctor Name",
-                          style: TextStyle(
-                            fontSize: 23,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          CircleAvatar(
+                            radius: 35,
+                            backgroundImage: AssetImage("profile.jpg"),
                           ),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          "Therapist",
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontWeight: FontWeight.bold,
+                          SizedBox(height: 15),
+                          Text(
+                            "Mlle TCHINGUÉ Patricia",
+                            style: TextStyle(
+                              fontSize: 23,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF9F97E2),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                Icons.call,
-                                color: Colors.white,
-                                size: 25,
-                              ),
+                          SizedBox(height: 5),
+                          Text(
+                            "Propriétaire de logement",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 255, 238, 238),
+                              fontWeight: FontWeight.bold,
                             ),
-                            SizedBox(width: 20),
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF9F97E2),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                CupertinoIcons.chat_bubble_text_fill,
-                                color: Colors.white,
-                                size: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -123,20 +97,10 @@ class AppointmentScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(
-                    "About Doctor",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-                    style: TextStyle(fontSize: 16, color: Colors.black54),
-                  ),
-                  SizedBox(height: 10),
                   Row(
                     children: [
                       Text(
-                        "Reviews",
+                        "Revision",
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
@@ -196,8 +160,7 @@ class AppointmentScreen extends StatelessWidget {
                                 ListTile(
                                   leading: CircleAvatar(
                                     radius: 25,
-                                    backgroundImage:
-                                        AssetImage("images/${imgs[index]}"),
+                                    backgroundImage: AssetImage("profile.png}"),
                                   ),
                                   title: Text(
                                     "Dr. Doctor Name",
@@ -293,38 +256,25 @@ class AppointmentScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Consultation price",
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                ),
-                Text(
-                  "\$100",
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 15),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ScheduleScreen(),
+                  ),
+                );
+              },
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
-                  color: Color(0xFF7165D6),
+                  color: AppColor.primary,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Center(
                   child: Text(
-                    "Book Appointment",
+                    "Prendre un rendez-vous",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,

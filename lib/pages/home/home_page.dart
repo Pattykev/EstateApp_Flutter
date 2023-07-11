@@ -8,7 +8,8 @@ import 'package:flutter_application_1/widgets/custom_textbox.dart';
 import 'package:flutter_application_1/widgets/icon_box.dart';
 import 'package:flutter_application_1/widgets/property_item.dart';
 import 'package:flutter_application_1/widgets/recent_item.dart';
-import 'package:flutter_application_1/widgets/recommend_item.dart';
+
+import '../category/studio.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Hello!",
+                  "Les annonces de logement disponibles",
                   style: TextStyle(
                     color: AppColor.darker,
                     fontSize: 14,
@@ -122,29 +123,6 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Recommandé",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  "Voir tout",
-                  style: TextStyle(fontSize: 14, color: AppColor.darker),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildRecommended(),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
                   "Récent",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
@@ -175,9 +153,12 @@ class _HomePageState extends State<HomePage> {
         data: categories[index],
         selected: index == _selectedCategory,
         onTap: () {
-          setState(() {
-            _selectedCategory = index;
-          });
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => Studio(),
+            ),
+          );
         },
       ),
     );
@@ -202,21 +183,6 @@ class _HomePageState extends State<HomePage> {
           data: populars[index],
         ),
       ),
-    );
-  }
-
-  Widget _buildRecommended() {
-    List<Widget> lists = List.generate(
-      recommended.length,
-      (index) => RecommendItem(
-        data: recommended[index],
-      ),
-    );
-
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.only(bottom: 5, left: 15),
-      child: Row(children: lists),
     );
   }
 

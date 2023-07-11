@@ -95,9 +95,10 @@ List recents = [
 List categories = [
   {"name": "Tout", "icon": FontAwesomeIcons.boxes},
   {"name": "Appartement", "icon": FontAwesomeIcons.storeAlt},
-  {"name": "Immeuble", "icon": FontAwesomeIcons.building},
+  {"name": "Duplex", "icon": FontAwesomeIcons.building},
   {"name": "Maison", "icon": FontAwesomeIcons.home},
-  {"name": "Villa", "icon": FontAwesomeIcons.university},
+  {"name": "Studio", "icon": FontAwesomeIcons.bed},
+  {"name": "Triplex", "icon": FontAwesomeIcons.university},
 ];
 
 var brokers = [

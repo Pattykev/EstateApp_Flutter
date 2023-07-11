@@ -6,7 +6,7 @@ import 'package:flutter_application_1/pages/details/components/custom_app_bar.da
 import 'package:flutter_application_1/pages/details/components/house_details.dart';
 
 class DetailsScreen extends StatefulWidget {
-  final House house;
+  final house;
 
   const DetailsScreen({Key? key, required this.house}) : super(key: key);
 
@@ -25,7 +25,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
             children: [
               Stack(
                 children: [
-                  CarouselImages(widget.house.moreImagesUrl),
+                  //CarouselImages(widget.house.moreImagesUrl),
+                  CarouselImages([
+                    'images/house1.jpeg',
+                    'images/indoor1.jpg',
+                    'images/indoor2.jpg',
+                    'images/indoor3.jpg',
+                    'images/indoor4.jpg',
+                    'images/indoor5.jpg',
+                  ]),
                   CustomAppBar(),
                 ],
               ),

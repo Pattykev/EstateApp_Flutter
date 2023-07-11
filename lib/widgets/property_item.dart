@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/color.dart';
 
+import '../pages/details/details_screen.dart';
 import 'custom_image.dart';
 import 'icon_box.dart';
 
@@ -29,11 +30,24 @@ class PropertyItem extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          CustomImage(
-            data["image"],
-            width: double.infinity,
-            height: 150,
-            radius: 25,
+          GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DetailsScreen(
+                    house: data,
+                  ),
+                ),
+              );
+            },
+            child: CustomImage(
+              data["image"],
+              width: double.infinity,
+              height: 150,
+              radius: 25,
+            ),
           ),
           Positioned(
             right: 20,

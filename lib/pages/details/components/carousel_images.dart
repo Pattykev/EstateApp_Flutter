@@ -25,22 +25,19 @@ class _CarouselImagesState extends State<CarouselImages> {
         autoplay: false,
         images: [
           AssetImage(
-            widget.imagesListUrl[0],
+            'images/house1.jpeg',
           ),
           AssetImage(
-            widget.imagesListUrl[1],
+            'images/indoor2.jpg',
           ),
           AssetImage(
-            widget.imagesListUrl[2],
+            'images/indoor3.jpg',
           ),
           AssetImage(
-            widget.imagesListUrl[3],
+            'images/indoor4.jpg',
           ),
           AssetImage(
-            widget.imagesListUrl[4],
-          ),
-          AssetImage(
-            widget.imagesListUrl[5],
+            'images/indoor5.jpg',
           ),
         ],
       ),

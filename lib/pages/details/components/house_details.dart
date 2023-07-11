@@ -4,7 +4,7 @@ import 'package:flutter_application_1/model/house.dart';
 import 'package:flutter_application_1/utils/color.dart';
 
 class HouseDetails extends StatefulWidget {
-  final House house;
+  final house;
 
   HouseDetails(this.house);
 
@@ -33,7 +33,8 @@ class _HouseDetailsState extends State<HouseDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '\$${widget.house.price.toStringAsFixed(3)}',
+                      //'\$${widget.house.price.toStringAsFixed(3)}',
+                      '100 000 Fcfa',
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -43,7 +44,8 @@ class _HouseDetailsState extends State<HouseDetails> {
                       height: 5,
                     ),
                     Text(
-                      widget.house.address,
+                      //widget.house.localisation,
+                      "Etoudi, Yaoundé",
                       style: TextStyle(
                         fontSize: 15,
                         color: Colors.blue,
@@ -52,8 +54,9 @@ class _HouseDetailsState extends State<HouseDetails> {
                     ),
                   ],
                 ),
+                //${widget.house.time}
                 Text(
-                  '${widget.house.time} hours ago',
+                  'Il y a 30 heures',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -66,7 +69,7 @@ class _HouseDetailsState extends State<HouseDetails> {
             padding: const EdgeInsets.only(
                 left: AppColor.appPadding, bottom: AppColor.appPadding),
             child: Text(
-              'House information',
+              'Informations sur le logement',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -96,7 +99,8 @@ class _HouseDetailsState extends State<HouseDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.house.sqFeet.toString(),
+                          //widget.house.sqFeet.toString(),
+                          "1 420 m²",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -106,7 +110,7 @@ class _HouseDetailsState extends State<HouseDetails> {
                           height: 10,
                         ),
                         Text(
-                          'Square foot',
+                          'Surface',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -133,7 +137,8 @@ class _HouseDetailsState extends State<HouseDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.house.bedRooms.toString(),
+                          //widget.house.bedRooms.toString(),
+                          "4",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -143,7 +148,7 @@ class _HouseDetailsState extends State<HouseDetails> {
                           height: 10,
                         ),
                         Text(
-                          'Bedrooms',
+                          'Chambres',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -170,7 +175,8 @@ class _HouseDetailsState extends State<HouseDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.house.bathRooms.toString(),
+                          //widget.house.bathRooms.toString(),
+                          "2",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -180,7 +186,7 @@ class _HouseDetailsState extends State<HouseDetails> {
                           height: 10,
                         ),
                         Text(
-                          'Bathrooms',
+                          'Salle(s) de bains',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -207,7 +213,8 @@ class _HouseDetailsState extends State<HouseDetails> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.house.garages.toString(),
+                          //widget.house.garages.toString(),
+                          "1",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -217,7 +224,7 @@ class _HouseDetailsState extends State<HouseDetails> {
                           height: 10,
                         ),
                         Text(
-                          'Garages',
+                          'Garage(s)',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -237,7 +244,8 @@ class _HouseDetailsState extends State<HouseDetails> {
               bottom: AppColor.appPadding * 4,
             ),
             child: Text(
-              widget.house.description,
+              //widget.house.description,
+              'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
               style: TextStyle(
                 color: AppColor.black.withOpacity(0.4),
                 height: 1.5,
