@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/utils/color.dart';
 
 import '../pages/details/details_screen.dart';
+import '../pages/owner/modify_announcement.dart';
 import 'custom_image.dart';
 import 'icon_box.dart';
 
 class PropertyItem extends StatelessWidget {
-  const PropertyItem({Key? key, required this.data}) : super(key: key);
+  const PropertyItem({Key? key, required this.data, required this.owner})
+      : super(key: key);
 
   final data;
+  final bool owner;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +39,11 @@ class PropertyItem extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => DetailsScreen(
-                    house: data,
-                  ),
+                  builder: (_) => owner
+                      ? ModifyAnnouncement()
+                      : DetailsScreen(
+                          house: data,
+                        ),
                 ),
               );
             },

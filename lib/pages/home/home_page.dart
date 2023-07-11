@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Les annonces de logement disponibles",
+                  "Bienvenue sur Estate App",
                   style: TextStyle(
                     color: AppColor.darker,
                     fontSize: 14,
@@ -181,6 +181,7 @@ class _HomePageState extends State<HomePage> {
         populars.length,
         (index) => PropertyItem(
           data: populars[index],
+          owner: false,
         ),
       ),
     );
