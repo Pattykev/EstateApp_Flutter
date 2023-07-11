@@ -166,6 +166,7 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
                         ),
                         TextFormField(
                           obscureText: false,
+                          maxLines: 5,
                           decoration: textInputDecoration.copyWith(
                               labelText: "Description",
                               prefixIcon: Icon(
@@ -207,7 +208,7 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
                             width: MediaQuery.of(context).size.width,
                             padding: EdgeInsets.symmetric(vertical: 18),
                             decoration: BoxDecoration(
-                              color: AppColor.primary,
+                              color: Color.fromARGB(255, 40, 178, 247),
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Center(
@@ -221,6 +222,9 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
                               ),
                             ),
                           ),
+                        ),
+                        const SizedBox(
+                          height: 15,
                         ),
                         SizedBox(
                           width: double.infinity,
