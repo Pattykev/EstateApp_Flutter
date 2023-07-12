@@ -25,7 +25,7 @@ class BottomButtons extends StatelessWidget {
               );
             },
             child: Container(
-              width: size.width * 0.4,
+              width: size.width * 0.6,
               height: 60,
               decoration: BoxDecoration(
                   color: AppColor.primary,
@@ -44,7 +44,7 @@ class BottomButtons extends StatelessWidget {
                     color: AppColor.white,
                   ),
                   Text(
-                    ' Enregistrer rendez-vous',
+                    ' prendre rendez-vous',
                     style: TextStyle(
                       color: AppColor.white,
                       fontSize: 16,
@@ -53,36 +53,6 @@ class BottomButtons extends StatelessWidget {
                   )
                 ],
               ),
-            ),
-          ),
-          Container(
-            width: size.width * 0.4,
-            height: 60,
-            decoration: BoxDecoration(
-                color: AppColor.primary,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                      color: AppColor.secondary.withOpacity(0.6),
-                      offset: Offset(0, 10),
-                      blurRadius: 10)
-                ]),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  (Icons.call_rounded),
-                  color: AppColor.white,
-                ),
-                Text(
-                  ' Appeler',
-                  style: TextStyle(
-                    color: AppColor.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                )
-              ],
             ),
           ),
         ],

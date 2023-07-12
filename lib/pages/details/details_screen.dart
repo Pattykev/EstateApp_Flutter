@@ -27,12 +27,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 children: [
                   //CarouselImages(widget.house.moreImagesUrl),
                   CarouselImages([
-                    'images/house1.jpeg',
-                    'images/indoor1.jpg',
-                    'images/indoor2.jpg',
-                    'images/indoor3.jpg',
-                    'images/indoor4.jpg',
-                    'images/indoor5.jpg',
+                    'assets/images/indoor1.jpg',
+                    'assets/images/indoor1.jpg',
+                    'assets/images/indoor2.jpg',
+                    'assets/images/indoor3.jpg',
+                    'assets/images/indoor4.jpg',
+                    'assets/images/indoor5.jpg',
                   ]),
                   CustomAppBar(),
                 ],

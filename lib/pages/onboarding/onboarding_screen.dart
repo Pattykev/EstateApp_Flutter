@@ -52,7 +52,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               IntroScreen(
                 image: onBoardingImage3,
                 title: "Ce qui vous correspond",
-                description: "Vous le trouverez ici, nul par ailleurs!",
+                description: "Vous le trouverez ici, nulle part ailleurs!",
                 count: "3",
               ),
             ],

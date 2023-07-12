@@ -9,7 +9,9 @@ import 'package:flutter_application_1/widgets/icon_box.dart';
 import 'package:flutter_application_1/widgets/property_item.dart';
 import 'package:flutter_application_1/widgets/recent_item.dart';
 
+import '../../widgets/bottombar_item.dart';
 import '../category/studio.dart';
+import '../visitor/explore.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,6 +21,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _activeTab = 0;
+  final List _barItems = [
+    {
+      "icon": Icons.home_outlined,
+      "active_icon": Icons.home_rounded,
+      "page": HomePage(),
+    },
+    {
+      "icon": Icons.search_outlined,
+      "active_icon": Icons.search,
+      "page": ExplorePage(),
+    },
+    {
+      "icon": Icons.favorite_border,
+      "active_icon": Icons.favorite_outlined,
+      "page": HomePage(),
+    },
+    {
+      "icon": Icons.forum_outlined,
+      "active_icon": Icons.forum_rounded,
+      "page": HomePage(),
+    },
+    {
+      "icon": Icons.settings_outlined,
+      "active_icon": Icons.settings_rounded,
+      "page": HomePage(),
+    },
+  ];
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -64,7 +94,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             CustomImage(
-              profile,
+              "https://avatars.githubusercontent.com/u/101264420?v=4",
               width: 35,
               height: 35,
               trBackground: true,
@@ -79,70 +109,71 @@ class _HomePageState extends State<HomePage> {
 
   _buildBody() {
     return Material(
-        child: SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 15,
-          ),
-          _buildSearch(),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildCategories(),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Text(
-                  "Populaire",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  "Voir tout",
-                  style: TextStyle(fontSize: 14, color: AppColor.darker),
-                ),
-              ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(
+              height: 15,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildPopulars(),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Récent",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  "Voir tout",
-                  style: TextStyle(fontSize: 14, color: AppColor.darker),
-                ),
-              ],
+            _buildSearch(),
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildRecent(),
-          const SizedBox(
-            height: 100,
-          ),
-        ],
+            _buildCategories(),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Populaire",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    "Voir tout",
+                    style: TextStyle(fontSize: 14, color: AppColor.darker),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            _buildPopulars(),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Récent",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    "Voir tout",
+                    style: TextStyle(fontSize: 14, color: AppColor.darker),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            _buildRecent(),
+            const SizedBox(
+              height: 100,
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   int _selectedCategory = 0;
@@ -224,5 +255,45 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  Widget _buildBottomBar() {
+    return Material(
+        child: Container(
+      height: 55,
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: AppColor.bottomBarColor,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: AppColor.shadowColor.withOpacity(0.1),
+            blurRadius: 1,
+            spreadRadius: 1,
+            offset: Offset(0, 1),
+          )
+        ],
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: List.generate(
+          _barItems.length,
+          (index) => BottomBarItem(
+            _activeTab == index
+                ? _barItems[index]["active_icon"]
+                : _barItems[index]["icon"],
+            isActive: _activeTab == index,
+            activeColor: AppColor.primary,
+            onTap: () {
+              setState(() {
+                _activeTab = index;
+              });
+            },
+          ),
+        ),
+      ),
+    ));
   }
 }

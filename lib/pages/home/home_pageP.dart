@@ -9,7 +9,10 @@ import 'package:flutter_application_1/widgets/icon_box.dart';
 import 'package:flutter_application_1/widgets/property_item.dart';
 import 'package:flutter_application_1/widgets/recent_item.dart';
 
+import '../../widgets/bottombar_item.dart';
 import '../category/studio.dart';
+import '../visitor/explore.dart';
+import 'home_page.dart';
 
 class HomePageP extends StatefulWidget {
   const HomePageP({Key? key}) : super(key: key);
@@ -19,6 +22,35 @@ class HomePageP extends StatefulWidget {
 }
 
 class _HomePagePState extends State<HomePageP> {
+  int _activeTab = 0;
+  final List _barItems = [
+    {
+      "icon": Icons.home_outlined,
+      "active_icon": Icons.home_rounded,
+      "page": HomePage(),
+    },
+    {
+      "icon": Icons.search_outlined,
+      "active_icon": Icons.search,
+      "page": ExplorePage(),
+    },
+    {
+      "icon": Icons.favorite_border,
+      "active_icon": Icons.favorite_outlined,
+      "page": HomePage(),
+    },
+    {
+      "icon": Icons.forum_outlined,
+      "active_icon": Icons.forum_rounded,
+      "page": HomePage(),
+    },
+    {
+      "icon": Icons.settings_outlined,
+      "active_icon": Icons.settings_rounded,
+      "page": HomePage(),
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -102,7 +134,7 @@ class _HomePagePState extends State<HomePageP> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
                 Text(
-                  "Vos annonces de disponibilité de logement",
+                  "Vos annonces ",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 Text(
@@ -183,7 +215,7 @@ class _HomePagePState extends State<HomePageP> {
         populars.length,
         (index) => PropertyItem(
           data: populars[index],
-          owner:true, 
+          owner: true,
         ),
       ),
     );
@@ -225,6 +257,50 @@ class _HomePagePState extends State<HomePageP> {
           )
         ],
       ),
+    );
+  }
+
+  Widget _buildBottomBar() {
+    return Scaffold(
+      body: Container(
+        height: 55,
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(horizontal: 15),
+        decoration: BoxDecoration(
+          color: AppColor.bottomBarColor,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: AppColor.shadowColor.withOpacity(0.1),
+              blurRadius: 1,
+              spreadRadius: 1,
+              offset: Offset(0, 1),
+            )
+          ],
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: List.generate(
+            _barItems.length,
+            (index) => BottomBarItem(
+              _activeTab == index
+                  ? _barItems[index]["active_icon"]
+                  : _barItems[index]["icon"],
+              isActive: _activeTab == index,
+              activeColor: AppColor.primary,
+              onTap: () {
+                setState(() {
+                  _activeTab = index;
+                });
+              },
+            ),
+          ),
+        ),
+      ),
+      floatingActionButton: _buildBottomBar(),
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
     );
   }
 }
