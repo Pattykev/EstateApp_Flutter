@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-var profile = "../lib/assets/profile.png";
+var profile = "assets/profile.png";
 
 List populars = [
   {
     "image":
         "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     "name": "Triplex",
-    "price": "\$280k",
+    "price": "280 000 Frs",
     "location": "Etoudi, Yaoundé",
     "is_favorited": true,
   },
@@ -16,7 +16,7 @@ List populars = [
     "image":
         "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     "name": "Studio",
-    "price": "\$150k",
+    "price": "150 000 Frs",
     "location": "Etoudi, Yaoundé",
     "is_favorited": false,
   },
@@ -24,7 +24,7 @@ List populars = [
     "image":
         "https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     "name": "Twin Castle",
-    "price": "\$175k",
+    "price": "175 000 Frs",
     "location": "Etoudi, Yaoundé",
     "is_favorited": false,
   },
@@ -32,7 +32,7 @@ List populars = [
     "image":
         "https://images.unsplash.com/photo-1549517045-bc93de075e53?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     "name": "Twin Villa",
-    "price": "\$120k",
+    "price": "120 000 Frs",
     "location": "Etoudi, Yaoundé",
     "is_favorited": false,
   },
@@ -70,7 +70,7 @@ List recents = [
     "image":
         "https://images.unsplash.com/photo-1549517045-bc93de075e53?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     "name": "Triplex",
-    "price": "\$180k",
+    "price": "180 000 Frs",
     "location": "Etoudi",
     "is_favorited": false,
   },
@@ -78,7 +78,7 @@ List recents = [
     "image":
         "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     "name": "Convertible Studio",
-    "price": "\$150k",
+    "price": "150 000 Frs",
     "location": "Etoudi",
     "is_favorited": false,
   },
@@ -86,7 +86,7 @@ List recents = [
     "image":
         "https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
     "name": "Triplex",
-    "price": "\$180k",
+    "price": "180 000 Frs",
     "location": "Etoudi",
     "is_favorited": false,
   },

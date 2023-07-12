@@ -34,9 +34,9 @@ class _HouseDetailsState extends State<HouseDetails> {
                   children: [
                     Text(
                       //'\$${widget.house.price.toStringAsFixed(3)}',
-                      '100 000 Fcfa',
+                      '100 000 Frs/mois',
                       style: TextStyle(
-                        fontSize: 28,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

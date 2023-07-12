@@ -27,7 +27,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 children: [
                   //CarouselImages(widget.house.moreImagesUrl),
                   CarouselImages([
-                    'assets/images/indoor1.jpg',
+                    'assets/images/house1.png',
                     'assets/images/indoor1.jpg',
                     'assets/images/indoor2.jpg',
                     'assets/images/indoor3.jpg',

@@ -14,6 +14,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/dropdownbutton.dart';
 import '../../widgets/dropdownbuttonStyleLogement.dart';
+import '../../widgets/locate_house.dart';
+import '../../widgets/location_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -186,6 +188,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         const SizedBox(
                           height: 15,
                         ),
+
                         // drop down button
                         //DropDownButton(),
                         //const SizedBox(height: 20),
@@ -197,6 +200,28 @@ class _RegisterPageState extends State<RegisterPage> {
                                 margin: EdgeInsets.symmetric(vertical: 15),
                                 child: Column(
                                   children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) => LocateHouse()));
+                                      },
+                                      child: Text('Upload Photo',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 16)),
+                                      style: ElevatedButton.styleFrom(
+                                          primary:
+                                              Color.fromARGB(255, 40, 178, 247),
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30))),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
                                     //Upload house images
                                     UploadImage(),
                                     const SizedBox(

@@ -5,20 +5,22 @@ import 'package:flutter_application_1/widgets/bottombar_item.dart';
 
 import 'package:flutter_application_1/pages/home/home_page.dart';
 
-class RootApp extends StatefulWidget {
-  const RootApp({Key? key}) : super(key: key);
+import '../home/home_pageP.dart';
+
+class RootAppP extends StatefulWidget {
+  const RootAppP({Key? key}) : super(key: key);
 
   @override
-  _RootAppState createState() => _RootAppState();
+  _RootAppPState createState() => _RootAppPState();
 }
 
-class _RootAppState extends State<RootApp> {
+class _RootAppPState extends State<RootAppP> {
   int _activeTab = 0;
   final List _barItems = [
     {
       "icon": Icons.home_outlined,
       "active_icon": Icons.home_rounded,
-      "page": HomePage(),
+      "page": HomePageP(),
     },
     {
       "icon": Icons.search_outlined,
@@ -28,17 +30,17 @@ class _RootAppState extends State<RootApp> {
     {
       "icon": Icons.favorite_border,
       "active_icon": Icons.favorite_outlined,
-      "page": HomePage(),
+      "page": HomePageP(),
     },
     {
       "icon": Icons.calendar_month_outlined,
       "active_icon": Icons.calendar_month_outlined,
-      "page": HomePage(),
+      "page": HomePageP(),
     },
     {
       "icon": Icons.settings_outlined,
       "active_icon": Icons.settings_rounded,
-      "page": HomePage(),
+      "page": HomePageP(),
     },
   ];
 

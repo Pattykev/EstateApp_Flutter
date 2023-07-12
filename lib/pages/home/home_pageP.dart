@@ -22,35 +22,6 @@ class HomePageP extends StatefulWidget {
 }
 
 class _HomePagePState extends State<HomePageP> {
-  int _activeTab = 0;
-  final List _barItems = [
-    {
-      "icon": Icons.home_outlined,
-      "active_icon": Icons.home_rounded,
-      "page": HomePage(),
-    },
-    {
-      "icon": Icons.search_outlined,
-      "active_icon": Icons.search,
-      "page": ExplorePage(),
-    },
-    {
-      "icon": Icons.favorite_border,
-      "active_icon": Icons.favorite_outlined,
-      "page": HomePage(),
-    },
-    {
-      "icon": Icons.forum_outlined,
-      "active_icon": Icons.forum_rounded,
-      "page": HomePage(),
-    },
-    {
-      "icon": Icons.settings_outlined,
-      "active_icon": Icons.settings_rounded,
-      "page": HomePage(),
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -98,7 +69,7 @@ class _HomePagePState extends State<HomePageP> {
               ],
             ),
             CustomImage(
-              profile,
+              "https://avatars.githubusercontent.com/u/101264420?v=4",
               width: 35,
               height: 35,
               trBackground: true,
@@ -257,50 +228,6 @@ class _HomePagePState extends State<HomePageP> {
           )
         ],
       ),
-    );
-  }
-
-  Widget _buildBottomBar() {
-    return Scaffold(
-      body: Container(
-        height: 55,
-        width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 15),
-        decoration: BoxDecoration(
-          color: AppColor.bottomBarColor,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: AppColor.shadowColor.withOpacity(0.1),
-              blurRadius: 1,
-              spreadRadius: 1,
-              offset: Offset(0, 1),
-            )
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: List.generate(
-            _barItems.length,
-            (index) => BottomBarItem(
-              _activeTab == index
-                  ? _barItems[index]["active_icon"]
-                  : _barItems[index]["icon"],
-              isActive: _activeTab == index,
-              activeColor: AppColor.primary,
-              onTap: () {
-                setState(() {
-                  _activeTab = index;
-                });
-              },
-            ),
-          ),
-        ),
-      ),
-      floatingActionButton: _buildBottomBar(),
-      floatingActionButtonLocation:
-          FloatingActionButtonLocation.miniCenterDocked,
     );
   }
 }

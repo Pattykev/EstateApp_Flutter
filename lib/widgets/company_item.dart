@@ -20,7 +20,6 @@ class CompanyItem extends StatelessWidget {
   final Color color;
   final bool selected;
   final GestureTapCallback? onTap;
-  House house = populars[0];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class CompanyItem extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (_) => DetailsScreen(
-              house: house,
+              house: data,
             ),
           ),
         );

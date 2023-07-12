@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../owner/rootP.dart';
 import '../visitor/root.dart';
 
 class LoginPage extends StatefulWidget {
@@ -170,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
           if (role == '   Visiteur') {
             nextScreenReplace(context, const RootApp());
           } else {
-            nextScreenReplace(context, const RootApp());
+            nextScreenReplace(context, const RootAppP());
           }
         } else {
           showSnackbar(context, Color.fromARGB(255, 40, 178, 247), value);

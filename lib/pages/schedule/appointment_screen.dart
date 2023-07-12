@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/pages/schedule/schedule_screen.dart';
 
 import '../../utils/color.dart';
+import '../../widgets/calendar.dart';
 
 class AppointmentScreen extends StatelessWidget {
   List imgs = [
@@ -52,7 +53,7 @@ class AppointmentScreen extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             radius: 35,
-                            backgroundImage: AssetImage("profile.jpg"),
+                            backgroundImage: AssetImage("assets/profile.png"),
                           ),
                           SizedBox(height: 15),
                           Text(
@@ -80,163 +81,12 @@ class AppointmentScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Container(
-              height: MediaQuery.of(context).size.height / 1.5,
-              width: double.infinity,
-              padding: EdgeInsets.only(
-                top: 20,
-                left: 15,
-              ),
+              padding: EdgeInsets.symmetric(vertical: 12, horizontal: 25),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
+                color: AppColor.primary,
+                borderRadius: BorderRadius.circular(10),
               ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        "Revision",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(width: 10),
-                      Icon(Icons.star, color: Colors.amber),
-                      Text(
-                        "4.9",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16,
-                        ),
-                      ),
-                      SizedBox(width: 5),
-                      Text(
-                        "(124)",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                      Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "See all",
-                          style: TextStyle(
-                            color: Color(0xFF7165D6),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 160,
-                    // width: 200,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.symmetric(vertical: 5),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 4,
-                                spreadRadius: 2,
-                              ),
-                            ],
-                          ),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width / 1.4,
-                            child: Column(
-                              children: [
-                                ListTile(
-                                  leading: CircleAvatar(
-                                    radius: 25,
-                                    backgroundImage: AssetImage("profile.png}"),
-                                  ),
-                                  title: Text(
-                                    "Dr. Doctor Name",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  subtitle: Text("1 day ago"),
-                                  trailing: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      Text(
-                                        "4.9",
-                                        style: TextStyle(
-                                          color: Colors.black54,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(height: 5),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                  child: Text(
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    "Many thanks to Dr. Dear. He is a great and a professional doctor.",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "Location",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  ListTile(
-                    leading: Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFF0EEFA),
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        Icons.location_on,
-                        color: Color(0xFF7165D6),
-                        size: 30,
-                      ),
-                    ),
-                    title: Text(
-                      "New York, Medical Center",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    subtitle: Text("address line of the medical center"),
-                  ),
-                ],
-              ),
+              child: Calendar(),
             ),
           ],
         ),
@@ -254,6 +104,7 @@ class AppointmentScreen extends StatelessWidget {
             ),
           ],
         ),
+        /*
         child: Column(
           children: [
             InkWell(
@@ -285,7 +136,8 @@ class AppointmentScreen extends StatelessWidget {
               ),
             ),
           ],
-        ),
+        ), 
+        */
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/calendar.dart';
 
 import '../../../utils/color.dart';
 import '../../schedule/appointment_screen.dart';
@@ -20,7 +21,7 @@ class BottomButtons extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => AppointmentScreen(),
+                  builder: (_) => Calendar(),
                 ),
               );
             },
