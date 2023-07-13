@@ -11,6 +11,7 @@ import 'package:flutter_application_1/widgets/recent_item.dart';
 
 import '../../widgets/bottombar_item.dart';
 import '../category/studio.dart';
+import '../search.dart';
 import '../visitor/explore.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     {
       "icon": Icons.search_outlined,
       "active_icon": Icons.search,
-      "page": ExplorePage(),
+      "page": Search(),
     },
     {
       "icon": Icons.favorite_border,

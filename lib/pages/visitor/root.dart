@@ -5,6 +5,10 @@ import 'package:flutter_application_1/widgets/bottombar_item.dart';
 
 import 'package:flutter_application_1/pages/home/home_page.dart';
 
+import '../search.dart';
+import '../userParam/schedule_list.dart';
+import '../userParam/user_param.dart';
+
 class RootApp extends StatefulWidget {
   const RootApp({Key? key}) : super(key: key);
 
@@ -23,7 +27,7 @@ class _RootAppState extends State<RootApp> {
     {
       "icon": Icons.search_outlined,
       "active_icon": Icons.search,
-      "page": ExplorePage(),
+      "page": Search(),
     },
     {
       "icon": Icons.favorite_border,
@@ -33,12 +37,12 @@ class _RootAppState extends State<RootApp> {
     {
       "icon": Icons.calendar_month_outlined,
       "active_icon": Icons.calendar_month_outlined,
-      "page": HomePage(),
+      "page": ScheduleList(),
     },
     {
       "icon": Icons.settings_outlined,
       "active_icon": Icons.settings_rounded,
-      "page": HomePage(),
+      "page": UserParam(),
     },
   ];
 

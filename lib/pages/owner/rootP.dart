@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/pages/owner/add_announce.dart';
 import 'package:flutter_application_1/pages/visitor/explore.dart';
 import 'package:flutter_application_1/utils/color.dart';
 import 'package:flutter_application_1/widgets/bottombar_item.dart';
@@ -6,6 +7,8 @@ import 'package:flutter_application_1/widgets/bottombar_item.dart';
 import 'package:flutter_application_1/pages/home/home_page.dart';
 
 import '../home/home_pageP.dart';
+import '../userParam/schedule_list.dart';
+import '../userParam/user_param.dart';
 
 class RootAppP extends StatefulWidget {
   const RootAppP({Key? key}) : super(key: key);
@@ -23,9 +26,9 @@ class _RootAppPState extends State<RootAppP> {
       "page": HomePageP(),
     },
     {
-      "icon": Icons.search_outlined,
-      "active_icon": Icons.search,
-      "page": ExplorePage(),
+      "icon": Icons.announcement_sharp,
+      "active_icon": Icons.announcement_sharp,
+      "page": AddAnnouncement(),
     },
     {
       "icon": Icons.favorite_border,
@@ -35,12 +38,12 @@ class _RootAppPState extends State<RootAppP> {
     {
       "icon": Icons.calendar_month_outlined,
       "active_icon": Icons.calendar_month_outlined,
-      "page": HomePageP(),
+      "page": ScheduleList(),
     },
     {
       "icon": Icons.settings_outlined,
       "active_icon": Icons.settings_rounded,
-      "page": HomePageP(),
+      "page": UserParam(),
     },
   ];
 

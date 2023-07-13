@@ -1,55 +1,166 @@
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
+import 'dart:async';
 
-class LocationService {
-  final String key = 'API_KEY';
+import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:lottie/lottie.dart';
 
-  Future<String> getPlaceId(String input) async {
-    final String url =
-        'https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=$input&inputtype=textquery&key=$key';
+class LocationService extends StatefulWidget {
+  const LocationService({Key? key}) : super(key: key);
 
-    var response = await http.get(Uri.parse(url));
-    var json = convert.jsonDecode(response.body);
-    var placeId = json['candidates'][0]['place_id'] as String;
+  @override
+  State<LocationService> createState() => _LocationServiceState();
+}
 
-    return placeId;
+class _LocationServiceState extends State<LocationService> {
+  //get map controller to access map
+  Completer<GoogleMapController> _googleMapController = Completer();
+  CameraPosition? _cameraPosition;
+  late LatLng _defaultLatLng;
+  late LatLng _draggedLatlng;
+  String _draggedAddress = "";
+
+  @override
+  void initState() {
+    _init();
+    super.initState();
   }
 
-  Future<Map<String, dynamic>> getPlace(String input) async {
-    final placeId = await getPlaceId(input);
+  _init() {
+    //set default latlng for camera position
+    _defaultLatLng = LatLng(11, 104);
+    _draggedLatlng = _defaultLatLng;
+    _cameraPosition =
+        CameraPosition(target: _defaultLatLng, zoom: 17.5 // number of map view
+            );
 
-    final String url =
-        'https://maps.googleapis.com/maps/api/place/details/json?place_id=$placeId&key=$key';
-
-    var response = await http.get(Uri.parse(url));
-    var json = convert.jsonDecode(response.body);
-    var results = json['result'] as Map<String, dynamic>;
-
-    print(results);
-    return results;
+    //map will redirect to my current location when loaded
+    _gotoUserCurrentPosition();
   }
 
-  Future<Map<String, dynamic>> getDirections(
-      String origin, String destination) async {
-    final String url =
-        'https://maps.googleapis.com/maps/api/directions/json?origin=$origin&destination=$destination&key=$key';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _buildBody(),
+      //get a float button to click and go to current location
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _gotoUserCurrentPosition();
+        },
+        child: Icon(Icons.location_on),
+      ),
+    );
+  }
 
-    var response = await http.get(Uri.parse(url));
-    var json = convert.jsonDecode(response.body);
+  Widget _buildBody() {
+    return Stack(children: [_getMap(), _getCustomPin(), _showDraggedAddress()]);
+  }
 
-    var results = {
-      'bounds_ne': json['routes'][0]['bounds']['northeast'],
-      'bounds_sw': json['routes'][0]['bounds']['southwest'],
-      'start_location': json['routes'][0]['legs'][0]['start_location'],
-      'end_location': json['routes'][0]['legs'][0]['end_location'],
-      'polyline': json['routes'][0]['overview_polyline']['points'],
-      'polyline_decoded': PolylinePoints()
-          .decodePolyline(json['routes'][0]['overview_polyline']['points']),
-    };
+  Widget _showDraggedAddress() {
+    return SafeArea(
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 60,
+        decoration: BoxDecoration(
+          color: Colors.blue,
+        ),
+        child: Center(
+            child: Text(
+          _draggedAddress,
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+        )),
+      ),
+    );
+  }
 
-    print(results);
+  Widget _getMap() {
+    return GoogleMap(
+      initialCameraPosition:
+          _cameraPosition!, //initialize camera position for map
+      mapType: MapType.normal,
+      onCameraIdle: () {
+        //this function will trigger when user stop dragging on map
+        //every time user drag and stop it will display address
+        _getAddress(_draggedLatlng);
+      },
+      onCameraMove: (cameraPosition) {
+        //this function will trigger when user keep dragging on map
+        //every time user drag this will get value of latlng
+        _draggedLatlng = cameraPosition.target;
+      },
+      onMapCreated: (GoogleMapController controller) {
+        //this function will trigger when map is fully loaded
+        if (!_googleMapController.isCompleted) {
+          //set controller to google map when it is fully loaded
+          _googleMapController.complete(controller);
+        }
+      },
+    );
+  }
 
-    return results;
+  Widget _getCustomPin() {
+    return Center(
+      child: Container(
+        width: 150,
+        child: Lottie.asset("assets/pin.json"),
+      ),
+    );
+  }
+
+  //get address from dragged pin
+  Future _getAddress(LatLng position) async {
+    //this will list down all address around the position
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(position.latitude, position.longitude);
+    Placemark address = placemarks[0]; // get only first and closest address
+    String addresStr =
+        "${address.street}, ${address.locality}, ${address.administrativeArea}, ${address.country}";
+    setState(() {
+      _draggedAddress = addresStr;
+    });
+  }
+
+  //get user's current location and set the map's camera to that location
+  Future _gotoUserCurrentPosition() async {
+    Position currentPosition = await _determineUserCurrentPosition();
+    _gotoSpecificPosition(
+        LatLng(currentPosition.latitude, currentPosition.longitude));
+  }
+
+  //go to specific position by latlng
+  Future _gotoSpecificPosition(LatLng position) async {
+    GoogleMapController mapController = await _googleMapController.future;
+    mapController.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: position, zoom: 17.5)));
+    //every time that we dragged pin , it will list down the address here
+    await _getAddress(position);
+  }
+
+  Future _determineUserCurrentPosition() async {
+    LocationPermission locationPermission;
+    bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    //check if user enable service for location permission
+    if (!isLocationServiceEnabled) {
+      print("user don't enable location permission");
+    }
+
+    locationPermission = await Geolocator.checkPermission();
+
+    //check if user denied location and retry requesting for permission
+    if (locationPermission == LocationPermission.denied) {
+      locationPermission = await Geolocator.requestPermission();
+      if (locationPermission == LocationPermission.denied) {
+        print("user denied location permission");
+      }
+    }
+
+    //check if user denied permission forever
+    if (locationPermission == LocationPermission.deniedForever) {
+      print("user denied permission forever");
+    }
+
+    return await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best);
   }
 }

@@ -14,7 +14,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/dropdownbutton.dart';
 import '../../widgets/dropdownbuttonStyleLogement.dart';
-import '../../widgets/locate_house.dart';
 import '../../widgets/location_service.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -205,9 +204,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (_) => LocateHouse()));
+                                                builder: (_) =>
+                                                    LocationService()));
                                       },
-                                      child: Text('Upload Photo',
+                                      child: Text('Localisation',
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 16)),

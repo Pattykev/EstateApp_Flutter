@@ -81,7 +81,7 @@ class _UploadImageState extends State<UploadImage> {
             onPressed: () {
               myAlert();
             },
-            child: Text('Upload Photo',
+            child: Text('Ajouter image',
                 style: TextStyle(color: Colors.white, fontSize: 16)),
             style: ElevatedButton.styleFrom(
                 primary: Color.fromARGB(255, 40, 178, 247),
@@ -109,7 +109,7 @@ class _UploadImageState extends State<UploadImage> {
                   ),
                 )
               : Text(
-                  "No Image",
+                  "Aucune Image",
                   style: TextStyle(fontSize: 16),
                 )
         ],

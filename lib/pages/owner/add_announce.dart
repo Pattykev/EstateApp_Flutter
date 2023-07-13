@@ -19,14 +19,14 @@ import '../../widgets/location_service.dart';
 import '../details/components/carousel_images.dart';
 import '../details/components/custom_app_bar.dart';
 
-class ModifyAnnouncement extends StatefulWidget {
-  const ModifyAnnouncement({Key? key}) : super(key: key);
+class AddAnnouncement extends StatefulWidget {
+  const AddAnnouncement({Key? key}) : super(key: key);
 
   @override
-  State<ModifyAnnouncement> createState() => _ModifyAnnouncementState();
+  State<AddAnnouncement> createState() => _AddAnnouncementState();
 }
 
-class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
+class _AddAnnouncementState extends State<AddAnnouncement> {
   bool _isLoading = false;
   final formKey = GlobalKey<FormState>();
   String prixLoyer = "";
@@ -34,6 +34,9 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
   String surface = "";
   String description = "";
   String distanceRoute = "";
+  String nbChambre = "";
+  String nbSalleB = "";
+  String nbcuisine = "";
   List<String> localisation = ["", ""];
   String? role = "";
 //String linkImage=UploadImage.pickUploadProfilePic();
@@ -146,7 +149,7 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
                           decoration: textInputDecoration.copyWith(
                               labelText: "Prix Loyer",
                               prefixIcon: Icon(
-                                Icons.monetization_on_outlined,
+                                Icons.numbers,
                                 color: Color.fromARGB(255, 40, 178, 247),
                               )),
                           onChanged: (val) {
@@ -160,6 +163,78 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
                             return RegExp(r"[0-9]*").hasMatch(val!)
                                 ? null
                                 : "Veuillez entrer un montant";
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                              labelText: "Nombre de salle de bains",
+                              prefixIcon: Icon(
+                                Icons.numbers,
+                                color: Color.fromARGB(255, 40, 178, 247),
+                              )),
+                          onChanged: (val) {
+                            setState(() {
+                              nbSalleB = val;
+                            });
+                          },
+
+                          // check tha validation
+                          validator: (val) {
+                            return RegExp(r"[1-9]*").hasMatch(val!)
+                                ? null
+                                : "On doit avoir au moins une salle de bains";
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                              labelText: "Nombre de chambre",
+                              prefixIcon: Icon(
+                                Icons.numbers,
+                                color: Color.fromARGB(255, 40, 178, 247),
+                              )),
+                          onChanged: (val) {
+                            setState(() {
+                              nbChambre = val;
+                            });
+                          },
+
+                          // check tha validation
+                          validator: (val) {
+                            return RegExp(r"[1-9]*").hasMatch(val!)
+                                ? null
+                                : "On doit avoir au moins une chambre";
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+
+                        TextFormField(
+                          decoration: textInputDecoration.copyWith(
+                              labelText: "Nombre de cuisine",
+                              prefixIcon: Icon(
+                                Icons.numbers,
+                                color: Color.fromARGB(255, 40, 178, 247),
+                              )),
+                          onChanged: (val) {
+                            setState(() {
+                              nbSalleB = val;
+                            });
+                          },
+
+                          // check tha validation
+                          validator: (val) {
+                            return RegExp(r"[1-9]*").hasMatch(val!)
+                                ? null
+                                : "On doit avoir au moins une cuisine";
                           },
                         ),
                         const SizedBox(
@@ -195,6 +270,15 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
                         //const SizedBox(height: 20),
 
                         //les champs cachés à afficher
+                        UploadImage(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        DropDownButton(),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        DropDownButtonStyle(),
 
                         ElevatedButton(
                           onPressed: () {
@@ -215,6 +299,7 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
                         const SizedBox(
                           height: 15,
                         ),
+
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
@@ -224,7 +309,7 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30))),
                             child: const Text(
-                              "Modifier annonce",
+                              "créer annonce",
                               style:
                                   TextStyle(color: Colors.white, fontSize: 16),
                             ),

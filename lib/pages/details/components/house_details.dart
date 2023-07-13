@@ -1,7 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_application_1/model/house.dart';
 import 'package:flutter_application_1/utils/color.dart';
+
+import '../../../widgets/location_service.dart';
+import '../../../widgets/widgets.dart';
 
 class HouseDetails extends StatefulWidget {
   final house;
@@ -43,14 +47,33 @@ class _HouseDetailsState extends State<HouseDetails> {
                     SizedBox(
                       height: 5,
                     ),
-                    Text(
-                      //widget.house.localisation,
-                      "Etoudi, Yaoundé",
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.blue,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    Row(
+                      children: [
+                        RichText(
+                          text: TextSpan(children: [
+                            //widget.house.localisation,
+                            WidgetSpan(
+                              child: Icon(
+                                Icons.pin_drop_outlined,
+                                color: Colors.blue,
+                                size: 20,
+                              ),
+                            ),
+                            TextSpan(
+                                text: "Etoudi, Yaoundé",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {
+                                    nextScreen(
+                                        context, const LocationService());
+                                  }),
+                          ]),
+                        )
+                      ],
                     ),
                   ],
                 ),
@@ -224,7 +247,7 @@ class _HouseDetailsState extends State<HouseDetails> {
                           height: 10,
                         ),
                         Text(
-                          'Garage(s)',
+                          'Cuisine(s)',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,

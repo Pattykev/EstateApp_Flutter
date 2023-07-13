@@ -60,6 +60,11 @@ dependencies:
   table_calendar: ^3.0.0-nullsafety.0
   flutter_polyline_points: ^1.0.0
   google_maps_flutter: ^2.3.0
+  http: ^0.13.4
+  geocoding: ^2.1.0
+  lottie: ^2.3.2
+  geolocator: ^9.0.2
+
   
 
 dev_dependencies:
