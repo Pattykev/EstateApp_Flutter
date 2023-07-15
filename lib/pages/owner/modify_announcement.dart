@@ -49,6 +49,10 @@ class _ModifyAnnouncementState extends State<ModifyAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Annonces de disponibilité de logement'),
+        centerTitle: true,
+      ),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(

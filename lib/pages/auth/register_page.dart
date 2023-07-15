@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_application_1/helper/helper_function.dart';
 import 'package:flutter_application_1/pages/auth/login_page.dart';
 import 'package:flutter_application_1/pages/home/home_page.dart';
 import 'package:flutter_application_1/pages/home/home_pageP.dart';
+import 'package:flutter_application_1/pages/owner/rootP.dart';
+import 'package:flutter_application_1/pages/visitor/root.dart';
 import 'package:flutter_application_1/service/auth_service.dart';
 import 'package:flutter_application_1/widgets/dropdownbutton.dart';
 import 'package:flutter_application_1/widgets/uploadimage.dart';
@@ -12,6 +15,7 @@ import 'package:flutter_application_1/widgets/widgets.dart';
 import 'package:flutter_application_1/widgets/dropdownbutton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../service/database_service.dart';
 import '../../widgets/dropdownbutton.dart';
 import '../../widgets/dropdownbuttonStyleLogement.dart';
 import '../../widgets/location_service.dart';
@@ -32,6 +36,10 @@ class _RegisterPageState extends State<RegisterPage> {
   String surname = "";
   String phone = "";
   String? role = "";
+  String styleLog = "";
+  String typeLog = "";
+  String lat = "4.55";
+  String long = "3.10";
 //String linkImage=UploadImage.pickUploadProfilePic();
   bool isOwner = false;
 
@@ -72,6 +80,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         const SizedBox(height: 5),
                         Image.asset("assets/logo1.png"),
                         const SizedBox(height: 5),
+                        UploadImage(),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
                               labelText: "Nom",
@@ -311,30 +323,38 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   register() async {
-    role = DataDropDownButton.getValue;
+    role = isOwner ? "   Propriétaire" : "   Visiteur";
+    typeLog = DataDropDownButton.getValue!;
+    styleLog = DataDropDownButtonStyle.getValue!;
+
     if (formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
+
       await authService
-          .registerUserWithEmailandPassword(
-              fullName, surname, email, phone, password, role)
+          .registerUserWithEmailandPassword(fullName, surname, email, password,
+              phone, role, typeLog, styleLog, lat, long)
           .then((value) async {
         if (value == true) {
+          await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
+              .savingHouseData(typeLog, styleLog, lat, long, email);
           // saving the shared preference state
           await HelperFunctions.saveUserLoggedInStatus(true);
           await HelperFunctions.saveUserEmailSF(email);
           await HelperFunctions.saveUserNameSF(fullName);
           if (role == '   Visiteur') {
-            nextScreenReplace(context, const HomePage());
+            nextScreenReplace(context, const RootApp());
           } else {
-            nextScreenReplace(context, const HomePageP());
+            nextScreenReplace(context, const RootAppP());
           }
         } else {
           showSnackbar(context, Colors.red, value);
           setState(() {
             _isLoading = false;
           });
+
+          ;
         }
       });
     }

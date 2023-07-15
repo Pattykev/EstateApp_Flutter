@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/model/event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/widgets/widgets.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../service/database_service.dart';
 import '../utils/color.dart';
 
 class Calendar extends StatefulWidget {
@@ -143,6 +146,7 @@ class _CalendarState extends State<Calendar> {
                       selectedEvents![selectedDay] = [
                         Event(title: _eventController.text)
                       ];
+                      register();
                     }
                   }
                   Navigator.pop(context);
@@ -158,5 +162,17 @@ class _CalendarState extends State<Calendar> {
         icon: Icon(Icons.add),
       ),
     );
+  }
+
+  register() async {
+    String? email = FirebaseAuth.instance.currentUser!.email;
+    if (email != "") {
+      await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
+          .savingScheduleData(email, _eventController.text, selectedDay);
+
+      showSnackbar(context, Colors.blue, "Enregistrer avec succès");
+    } else {
+      showSnackbar(context, Colors.blue, "Un problème est survenu");
+    }
   }
 }

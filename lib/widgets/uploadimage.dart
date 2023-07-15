@@ -33,7 +33,7 @@ class _UploadImageState extends State<UploadImage> {
           return AlertDialog(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            title: Text('Please choose media to select'),
+            title: Text('S\'il vous plait choisissez l\'image à selectionner '),
             content: Container(
               height: MediaQuery.of(context).size.height / 6,
               child: Column(

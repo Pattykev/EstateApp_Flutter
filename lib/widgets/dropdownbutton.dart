@@ -9,9 +9,10 @@ class DropDownButton extends StatefulWidget {
 
 final List<String> list = [
   '  Appartement',
-  '   Maison',
-  '    Villa',
-  '   Studio'
+  '  Duplex',
+  '  Maison',
+  '  Studio',
+  '  Triplex'
 ];
 String textTypeLogement = '   Type de logement';
 

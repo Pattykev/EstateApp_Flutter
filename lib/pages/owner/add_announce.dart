@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_application_1/helper/helper_function.dart';
 import 'package:flutter_application_1/pages/auth/login_page.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_application_1/widgets/widgets.dart';
 import 'package:flutter_application_1/widgets/dropdownbutton.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../service/database_service.dart';
 import '../../utils/color.dart';
 import '../../widgets/dropdownbutton.dart';
 import '../../widgets/dropdownbuttonStyleLogement.dart';
@@ -33,12 +35,12 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
   String prixCaution = "";
   String surface = "";
   String description = "";
+  String lat = "4.5";
+  String long = "3.2";
   String distanceRoute = "";
   String nbChambre = "";
   String nbSalleB = "";
   String nbcuisine = "";
-  List<String> localisation = ["", ""];
-  String? role = "";
 //String linkImage=UploadImage.pickUploadProfilePic();
   bool isOwner = false;
 
@@ -52,6 +54,10 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Annonces disponibilités de logement'),
+        centerTitle: true,
+      ),
       body: _isLoading
           ? Center(
               child: CircularProgressIndicator(
@@ -147,14 +153,14 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                         ),
                         TextFormField(
                           decoration: textInputDecoration.copyWith(
-                              labelText: "Prix Loyer",
+                              labelText: "Prix Caution",
                               prefixIcon: Icon(
-                                Icons.numbers,
+                                Icons.monetization_on_outlined,
                                 color: Color.fromARGB(255, 40, 178, 247),
                               )),
                           onChanged: (val) {
                             setState(() {
-                              prixLoyer = val;
+                              prixCaution = val;
                             });
                           },
 
@@ -226,7 +232,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                               )),
                           onChanged: (val) {
                             setState(() {
-                              nbSalleB = val;
+                              nbChambre = val;
                             });
                           },
 
@@ -314,7 +320,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                                   TextStyle(color: Colors.white, fontSize: 16),
                             ),
                             onPressed: () {
-                              //register();
+                              register();
                             },
                           ),
                         ),
@@ -324,35 +330,31 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
             ),
     );
   }
-/*
+
   register() async {
-    role = DataDropDownButton.getValue;
-    if (formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-      });
-      await authService
-          .registerUserWithEmailandPassword(
-              fullName, surname, email, phone, password, role)
-          .then((value) async {
-        if (value == true) {
-          // saving the shared preference state
-          await HelperFunctions.saveUserLoggedInStatus(true);
-          await HelperFunctions.saveUserEmailSF(email);
-          await HelperFunctions.saveUserNameSF(fullName);
-          if (role == '   Visiteur') {
-            nextScreenReplace(context, const HomePage());
-          } else {
-            nextScreenReplace(context, const HomePageP());
-          }
-        } else {
-          showSnackbar(context, Colors.red, value);
-          setState(() {
-            _isLoading = false;
-          });
-        }
-      });
+    String typeLog = DataDropDownButton.getValue!;
+    String styleLog = DataDropDownButtonStyle.getValue!;
+    String? email = FirebaseAuth.instance.currentUser!.email;
+    if (email != "") {
+      await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
+          .savingAnnounceData(
+              typeLog,
+              styleLog,
+              lat,
+              long,
+              surface,
+              prixLoyer,
+              distanceRoute,
+              prixCaution,
+              nbSalleB,
+              nbChambre,
+              nbcuisine,
+              description,
+              email);
+
+      showSnackbar(context, Colors.blue, "Enregistrer avec succès");
+    } else {
+      showSnackbar(context, Colors.blue, "Un problème est survenu");
     }
-    }
-    */
+  }
 }

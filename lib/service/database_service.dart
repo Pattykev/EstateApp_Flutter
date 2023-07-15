@@ -2,27 +2,45 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
   final String? uid;
+  //static String id = "";
   DatabaseService({this.uid});
 
   // reference for our collections
   final CollectionReference userCollection =
       FirebaseFirestore.instance.collection("users");
+  final CollectionReference houseCollection =
+      FirebaseFirestore.instance.collection("houses");
+  final CollectionReference announceCollection =
+      FirebaseFirestore.instance.collection("announces");
+  final CollectionReference scheduleCollection =
+      FirebaseFirestore.instance.collection("schedules");
   //final CollectionReference groupCollection =
   //  FirebaseFirestore.instance.collection("groups");
 
   // saving the userdata
-  Future savingUserData(String fullName, String surname, String email,
-      String phone, String? role) async {
+  Future savingUserData(
+      String fullName,
+      String surname,
+      String email,
+      String phone,
+      String? role,
+      String? typeLog,
+      String? styleLog,
+      String? lat,
+      String? long) async {
     return await userCollection.doc(uid).set({
       "fullName": fullName,
       "surname": surname,
       "email": email,
       "phone": phone,
       "role": role,
-      //"groups": [],
+      "liste logement": [],
+      "liste annonce": [],
+      "liste rendez vous": [],
       //"profilePic": "",
       "uid": uid,
     });
+    // id = uid!;
   }
 
   // getting user data
@@ -30,6 +48,86 @@ class DatabaseService {
     QuerySnapshot snapshot =
         await userCollection.where("email", isEqualTo: email).get();
     return snapshot;
+  }
+
+//sauvegarder logement
+
+  Future savingHouseData(String typeLog, String styleLog, String lat,
+      String long, String email) async {
+    DocumentReference houseDocumentReference = await houseCollection.add({
+      "type Logement": typeLog,
+      "style Logement": styleLog,
+      "Latitude": lat,
+      "Longitude": long,
+      "email": email,
+      //"image logement": imageLog, String imageLog
+    });
+
+    DocumentReference userDocumentReference = userCollection.doc(uid);
+    return await userDocumentReference
+        .update({"liste logement": "${houseDocumentReference.id}"});
+  }
+
+  Future savingScheduleData(
+      String? userEmail, String subject, DateTime date) async {
+    DocumentReference scheduleDocumentReference = await scheduleCollection.add({
+      "email visiteur": userEmail,
+      "sujet": subject,
+      "date": date,
+      "etat": 'A venir',
+    });
+
+    DocumentReference userDocumentReference = userCollection.doc(uid);
+    return await userDocumentReference
+        .update({"liste rendez vous": "${scheduleDocumentReference.id}"});
+  }
+
+  Future savingAnnounceData(
+      String typeLog,
+      String styleLog,
+      String lat,
+      String long,
+      String surface,
+      String prixLoyer,
+      String distanceRoute,
+      String prixCaution,
+      String nbSalleB,
+      String nbChambre,
+      String nbCuisine,
+      String description,
+      String? email) async {
+    DocumentReference announceDocumentReference = await announceCollection.add({
+      "type Logement": typeLog,
+      "style Logement": styleLog,
+      "Latitude": lat,
+      "Longitude": long,
+      "surface": surface,
+      "prix Loyer": prixLoyer,
+      "distance route": distanceRoute,
+      "prix caution": prixCaution,
+      "nombre salle bains": nbSalleB,
+      "nombre chambres": nbChambre,
+      "nombre cuisine": nbCuisine,
+      "description": description,
+      //"profilePic": "",
+      "email": email,
+    });
+
+    DocumentReference userDocumentReference = userCollection.doc(uid);
+    return await userDocumentReference
+        .update({"liste annonce": "${announceDocumentReference.id}"});
+  }
+
+  // getting an announce data
+  Future gettingAnnounceData(String email) async {
+    QuerySnapshot snapshot =
+        await announceCollection.where("email", isEqualTo: email).get();
+    return snapshot;
+  }
+
+  // get announces data
+  getUserGroups() async {
+    return announceCollection.doc(uid).snapshots();
   }
 
 /*
